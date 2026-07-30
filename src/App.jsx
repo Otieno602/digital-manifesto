@@ -1,4 +1,4 @@
-import Scene01Arrival from "./scenes/Scene01Arrival";
+import Scene01Arrival from "./scenes/01Arrival";
 
 function App() {
   return (

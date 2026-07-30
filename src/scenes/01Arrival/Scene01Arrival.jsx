@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ScrollIndicator from "../components/ScrollIndicator";
-import heroImage from "../assets/hero.png";
+import ScrollIndicator from "../../components/ScrollIndicator";
+import heroImage from "./assets/hero.png";
 
 export default function Scene01Arrival() {
   const [intro, setIntro] = useState(0);
