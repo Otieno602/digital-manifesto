@@ -1,10 +1,10 @@
+import Scene01Arrival from "./scenes/Scene01Arrival";
+
 function App() {
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-      <h1 className="text-6xl font-bold text-white">
-        Digital Manifesto
-      </h1>
-    </div>
+     <main>
+      <Scene01Arrival />
+    </main>
   );
 }
 
