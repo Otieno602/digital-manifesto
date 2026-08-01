@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollIndicator from "../../components/ScrollIndicator";
+
+import gsap from "../../lib/gsap";
+import { useScene } from "../../hooks/useScene";
+
 import heroImage from "./assets/hero.png";
 
 export default function Scene01Arrival() {
   const [intro, setIntro] = useState(0);
+  const heroRef = useRef(null);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const first = setTimeout(() => {
@@ -21,9 +27,28 @@ export default function Scene01Arrival() {
     };
   }, []);
 
-  return (
-    <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+  useScene(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "60% top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
 
+    tl.to(heroRef.current, {
+      y: -80,
+      opacity: 0.35,
+      ease: "none",
+    });
+  }, sectionRef);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative h-screen w-full overflow-hidden bg-black text-white"
+    >
       {/* Background */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
@@ -42,7 +67,6 @@ export default function Scene01Arrival() {
 
       {/* Cinematic Overlay */}
       <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/30 to-black/80" />
-
 
       {/* Intro */}
       <AnimatePresence>
@@ -63,21 +87,17 @@ export default function Scene01Arrival() {
               duration: 1,
             }}
           >
-
             <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">
-              {intro === 0
-                ? "Every community has a story."
-                : "This is ours."}
+              {intro === 0 ? "Every community has a story." : "This is ours."}
             </h1>
-
           </motion.div>
         )}
       </AnimatePresence>
 
-
       {/* Main Hero */}
       {intro === 2 && (
         <motion.div
+          ref={heroRef}
           className="relative z-10 h-full flex flex-col justify-center px-8 md:px-20"
           initial={{
             opacity: 0,
@@ -91,7 +111,6 @@ export default function Scene01Arrival() {
             duration: 1.5,
           }}
         >
-
           <h1 className="max-w-4xl text-6xl md:text-8xl font-bold leading-tight">
             Our Ward.
             <br />
@@ -100,27 +119,19 @@ export default function Scene01Arrival() {
             Our Responsibility.
           </h1>
 
-
           <div className="mt-10 flex gap-5">
-
             <button className="rounded-full bg-white px-8 py-4 text-black font-medium hover:scale-105 transition">
               Explore the Vision
             </button>
 
-
             <button className="rounded-full border border-white/50 px-8 py-4 hover:bg-white hover:text-black transition">
               Join the Movement
             </button>
-
           </div>
-
-
         </motion.div>
       )}
 
-
       {intro === 2 && <ScrollIndicator />}
-
     </section>
   );
 }
