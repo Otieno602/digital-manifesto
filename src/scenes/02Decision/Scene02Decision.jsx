@@ -182,7 +182,7 @@ export default function Scene02Decision() {
               >
                 <p
                   ref={(el) => (paragraphRefs.current[index] = el)}
-                  className="max-w-3xl text-2xl leading-relaxed text-white"
+                  className="max-w-3xl text-3xl font-bold leading-relaxed text-white"
                 >
                   {paragraph}
                 </p>
